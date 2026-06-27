@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outbound Engagement — Priya Makwana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #F5F4F0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #191919;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      width: 698px;
+      margin: 0 auto;
+      padding: 64px 0 80px;
+    }
+
+    @media (max-width: 740px) {
+      .page { width: auto; padding: 40px 24px 80px; }
+    }
+
+    /* ── NAV ── */
+    .cs-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .cs-nav a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      transition: color 0.15s;
+    }
+
+    .cs-nav a:hover { color: #191919; }
+
+    .cs-nav-sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(245, 244, 240, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .cs-nav-sticky.visible { transform: translateY(0); }
+    .cs-nav-sticky-inner {
+      width: 698px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    @media (max-width: 740px) {
+      .cs-nav-sticky-inner { width: auto; padding: 16px 24px; }
+    }
+    .cs-nav-sticky a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .cs-nav-sticky a:hover { color: #191919; }
+
+    /* ── HERO ── */
+    .cs-title {
+      font-size: 38px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    /* ── BODY TEXT ── */
+    .cs-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-body + .cs-body {
+      margin-top: 16px;
+    }
+
+    .cs-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    /* ── IMAGES ── */
+    .cs-img {
+      width: 100%;
+      border-radius: 21px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .cs-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── SCREEN TITLE ── */
+    .cs-screen-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 16px;
+    }
+
+    /* ── SCROLLABLE SCREEN CONTAINER ── */
+    .cs-scroll-container {
+      width: 100%;
+      height: 600px;
+      border-radius: 21px;
+      background: #D0DED9;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-bottom: 24px;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar-thumb {
+      background: #B0C8C2;
+      border-radius: 100px;
+    }
+
+    .cs-scroll-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      padding: 30px;
+    }
+
+    /* ── PLACEHOLDER ── */
+    .cs-placeholder-img {
+      background: #EDECEA;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cs-placeholder-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #B8B5B0;
+    }
+
+    /* ── METADATA ── */
+    .cs-meta {
+      display: flex;
+      gap: 0;
+      margin-top: 32px;
+      margin-bottom: 64px;
+    }
+
+    .cs-meta-col {
+      padding-right: 48px;
+    }
+
+    .cs-meta-col:last-child {
+      flex: 1;
+      padding-right: 0;
+    }
+
+    .cs-meta-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 8px;
+    }
+
+    .cs-meta-value {
+      display: block;
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.6;
+    }
+
+    .cs-meta-value a {
+      color: #606060;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cs-meta-value a:hover { color: #191919; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #E0DED9;
+      margin: 64px 0;
+    }
+
+    /* ── DOT DIVIDER ── */
+    .dot-divider {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 80px 0;
+    }
+
+    .dot-divider span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D9D7D2;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .cs-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    /* ── STEP HEADING ── */
+    .cs-step-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    /* ── DIVE-IN TRANSITION ── */
+    .cs-dive-in {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 120px;
+    }
+
+    /* ── STEPS ── */
+    .cs-step {
+      margin-bottom: 120px;
+    }
+
+    .cs-annotation {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-annotation + .cs-annotation {
+      margin-top: 16px;
+    }
+
+    /* ── CALLOUT ROWS ── */
+    .cs-callout-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    .cs-callout--full {
+      grid-column: 1 / -1;
+    }
+
+    .cs-callout-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+    }
+
+    .cs-callout-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-callout-body + .cs-callout-body {
+      margin-top: 16px;
+    }
+
+    .cs-callout-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    .cs-callout-list {
+      list-style: none;
+      margin: 8px 0;
+    }
+
+    .cs-callout-list li {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .cs-callout-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #808080;
+    }
+
+    /* ── METRIC CARDS ── */
+    .cs-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .cs-metric-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      padding: 20px 16px;
+    }
+
+    .cs-metric-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 6px;
+    }
+
+    .cs-metric-desc {
+      font-size: 12px;
+      font-weight: 400;
+      color: #808080;
+      line-height: 1.5;
+    }
+
+    /* ── TRACK METHOD CARDS ── */
+    .cs-method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .cs-method-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .cs-method-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .cs-method-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 8px;
+    }
+
+    .cs-method-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.55;
+    }
+
+    /* ── REFLECTIONS ── */
+    .cs-reflections {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .cs-reflection-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .cs-reflection-body {
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    .footer { margin-top: 120px; }
+
+    .footer-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      margin-bottom: 24px;
+    }
+
+    .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #808080;
+      border: 2px solid #E0DED9;
+      border-radius: 100px;
+      padding: 12px 24px;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .footer-links a:hover { border-color: #808080; color: #191919; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      cursor: zoom-out;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      cursor: default;
+    }
+    .cs-scroll-container img { cursor: zoom-in; }
+  </style>
+</head>
+<body>
+  <nav class="cs-nav-sticky" id="cs-nav-sticky">
+    <div class="cs-nav-sticky-inner">
+      <a href="index.html">← Home</a>
+      <a href="meal-planner.html">Next project →</a>
+    </div>
+  </nav>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav class="cs-nav">
+      <a href="index.html">← Home</a>
+      <a href="meal-planner.html">Next project →</a>
+    </nav>
+
+    <!-- HERO -->
+    <h1 class="cs-title">Outbound engagement tracking</h1>
+    <p class="cs-body">Community managers leave hundreds of comments a week on viral posts, trending threads, and creator content — building brand presence one interaction at a time. It's one of the most active parts of social strategy. And until now, one of the least measurable. Outbound Engagement made it trackable: a dashboard where every comment your team places can be quantified, reported on, and acted on.</p>
+
+    <!-- HERO IMAGE -->
+    <img src="images/outbound/outbound%20cover%20page.svg" alt="Outbound dashboard cover" style="width: 100%; display: block; margin-top: 32px;" />
+
+    <!-- METADATA -->
+    <div class="cs-meta">
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">Collaborators</span>
+        <span class="cs-meta-value">Rhea (Designer)</span>
+        <span class="cs-meta-value">Tushar Beladiya (Engineer)</span>
+        <span class="cs-meta-value">Lap Nguyen (Engineer)</span>
+      </div>
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">Timeline</span>
+        <span class="cs-meta-value">2 months</span>
+      </div>
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">My Role</span>
+        <span class="cs-meta-value">Designed the outbound tracking dashboard and the comment upload flow and navigate the AI verification problem in the upload experience.</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- IMPACT -->
+    <div style="margin-top: 0;">
+      <h2 class="cs-heading">Impact!</h2>
+      <p class="cs-body" style="margin-top: 16px;">Outbound wasn't just a new dashboard — it gave community teams a language to talk about work that had always been invisible. When it shipped, the response from community managers, social strategists, and brand teams was immediate.</p>
+      <div class="cs-scroll-container" style="margin-top: 24px; background: #CADBD6; height: auto; overflow: hidden;">
+        <img src="images/outbound/impact/Frame%201171282175.png" alt="Customer reactions to Outbound" style="width: 100%; height: auto; display: block; transform: scale(1.08);" />
+      </div>
+    </div>
+
+    <!-- WHY OUTBOUND COMMENTS -->
+    <div style="margin-top: 120px; margin-bottom: 120px;">
+      <h2 class="cs-heading">The comment metrics that went unmeasured</h2>
+      <p class="cs-body">A single comment on a viral post can pull in hundreds of thousands of likes, replies, impressions and six figures in EMV. That performance existed all along. It just had nowhere to be measured.</p>
+      <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 40px;">
+        <div style="background: #CADBD6; border-radius: 21px; overflow: hidden; display: flex; align-items: center; padding: 24px 80px;">
+          <img src="images/outbound/comment.png" alt="Comment example with tracked metrics" style="width: 85%; height: auto; display: block; margin: 0 auto;" />
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <div class="cs-metric-card" style="background: rgba(255, 255, 255, 0.7); flex: 1;">
+            <div class="cs-metric-name">Likes</div>
+            <div class="cs-metric-desc">Engagement on the comment itself</div>
+          </div>
+          <div class="cs-metric-card" style="background: rgba(255, 255, 255, 0.7); flex: 1;">
+            <div class="cs-metric-name">Replies</div>
+            <div class="cs-metric-desc">Conversations started from the comment</div>
+          </div>
+          <div class="cs-metric-card" style="background: rgba(255, 255, 255, 0.7); flex: 1;">
+            <div class="cs-metric-name">Impressions</div>
+            <div class="cs-metric-desc">Views driven by comment visibility</div>
+          </div>
+          <div class="cs-metric-card" style="background: rgba(255, 255, 255, 0.7); flex: 1;">
+            <div class="cs-metric-name">EMV</div>
+            <div class="cs-metric-desc">Earned Media Value based on virality and rank</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE DASHBOARD -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">The outbound dashboard</h2>
+
+      <p class="cs-annotation">The main dashboard gives community managers and their leads a single view of every comment the team has placed—across platforms, across time. At its core, it is proof of the value of community engagement and the impact of a brand's outbound strategy.</p>
+
+      <div class="cs-scroll-container" style="margin-top: 24px; height: auto; overflow-y: visible;">
+        <img src="images/outbound/outbound%20dashboard.png" alt="Outbound dashboard — main view" />
+      </div>
+
+      <p class="cs-annotation" style="margin-top: 24px;">The dashboard consists of 4 parts:</p>
+
+      <ul class="cs-annotation" style="margin-top: 12px; padding-left: 20px; display: flex; flex-direction: column; gap: 14px;">
+        <li><strong>Community Growth Report</strong> — top comments, metrics, and leaderboard, auto-compiled into a downloadable PDF.</li>
+        <li><strong>Metrics over time</strong> — comments, likes, replies, impressions, and EMV across a custom date range, with daily breakdowns on hover.</li>
+        <li><strong>Brand's comments</strong> — the brand's best-performing comments in one searchable, exportable feed.</li>
+        <li><strong>Community leaderboard</strong> — every manager ranked by engagement, volume, and score, filterable by topic, platform, and date.</li>
+      </ul>
+
+      <!-- Community Growth Report -->
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 28px;">Community growth report - the most loved piece!</h3>
+      <p class="cs-annotation" style="margin-top: 12px;">Think Spotify Wrapped for the most unhinged comments. Weekly, monthly, or yearly — top comments, key metrics, and team leaderboard compiled automatically and downloadable as a PDF. Built so team members have their performance visible across the team without anyone having to ask.</p>
+
+      <img src="images/outbound/Frame%201171275649.png" alt="Community growth report — filters and cover screens" style="width: 100%; display: block; margin-top: 24px; border-radius: 21px;" />
+
+      <div class="cs-scroll-container" style="margin-top: 24px; height: auto; overflow-y: visible;">
+        <img src="images/outbound/report%20pdf.png" alt="Community growth report — full PDF" />
+      </div>
+
+    </div>
+
+    <!-- THREE WAYS TO TRACK -->
+    <div class="cs-step" style="margin-bottom: 0;">
+      <h2 class="cs-step-heading">How comments get into the dashboard</h2>
+
+      <p class="cs-annotation">Not every comment gets placed from the same context. The team might be monitoring through Plot's feed, commenting from their phone, or uploading a batch after the fact. The product supports all three paths.</p>
+
+      <div class="cs-method-grid">
+        <div class="cs-method-card">
+          <span class="cs-method-label">Auto</span>
+          <div class="cs-method-title">Via social listening</div>
+          <p class="cs-method-desc">Plot's listening pipeline auto-detects comments placed by tracked handles. Nothing to upload — it just shows up.</p>
+        </div>
+        <div class="cs-method-card">
+          <span class="cs-method-label">Upload</span>
+          <div class="cs-method-title">Comment URLs</div>
+          <p class="cs-method-desc">Paste a post link from desktop. AI extracts the comment data automatically.</p>
+        </div>
+        <div class="cs-method-card">
+          <span class="cs-method-label">Manual</span>
+          <div class="cs-method-title">Comment screenshot entry</div>
+          <p class="cs-method-desc">Drop in a screenshot when the AI can't detect a comment by URL. Best for one-offs or edge cases the link parser misses.</p>
+        </div>
+      </div>
+
+      <!-- Auto tracking -->
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Auto-tracking via social listening</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: auto; overflow-y: visible;">
+        <img src="images/outbound/Auto-tracking%20via%20social%20listening.png" alt="Social listening feed — auto comment capture" />
+      </div>
+      <p class="cs-annotation" style="margin-top: 24px;">When a tracked handle leaves a comment, Plot surfaces it in the social listening feed with a quick action to log it directly to the outbound dashboard. No copy-pasting, no context switching.</p>
+
+      <!-- Bulk URL upload -->
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Uploading single or bulk URLs</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: auto; overflow-y: visible;">
+        <img src="images/outbound/bulk%20upload.png" alt="Bulk URL upload — comment links" />
+      </div>
+      <p class="cs-annotation" style="margin-top: 24px;">Teams can paste one comment URL or drop in a batch at once. Plot parses each link and pulls the comment data automatically, so a week's worth of outbound work can be logged in one pass.</p>
+
+      <!-- Manual screenshot entry -->
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Manually adding comment screenshot</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: auto; overflow-y: visible;">
+        <img src="images/outbound/manually%20add%20screenshot.png" alt="Manually adding comment screenshot" />
+      </div>
+      <p class="cs-annotation" style="margin-top: 24px;">When a comment can't be found by URL, teams can drop in a screenshot instead. Plot extracts the comment data straight from the image.</p>
+    </div>
+
+    <!-- UPLOAD FLOW — DESIGN CHALLENGE -->
+    <div class="cs-step">
+      <!-- After — with verification -->
+      <h3 class="cs-screen-title" style="margin-top: 48px; font-size: 20px;">Upload with verification step</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: auto; overflow-y: visible;">
+        <img src="images/outbound/Verification%20step.png" alt="Upload flow — verification step added" />
+      </div>
+      <p class="cs-annotation" style="margin-top: 24px;">The AI processes the screenshot and surfaces what it extracted — comment text, metrics, the post it came from. Users confirm or correct before anything is logged. The step exists because hallucinations happen, and catching them early stops bad data from compounding.</p>
+
+    </div>
+
+    <!-- BEHIND THE SCENES -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Behind the scenes</h2>
+
+      <img src="images/outbound/bts%201.png" alt="Behind the scenes — screenshot 1" style="width: 100%; display: block; margin-top: 24px; border-radius: 21px;" />
+
+      <img src="images/outbound/bts%202.png" alt="Behind the scenes — screenshot 2" style="width: 100%; display: block; margin-top: 24px; border-radius: 21px;" />
+    </div>
+
+    <!-- DOT DIVIDER -->
+    <div class="dot-divider">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- REFLECTIONS -->
+    <div style="margin-bottom: 0;">
+      <h2 class="cs-heading">Reflections</h2>
+      <p class="cs-body" style="margin-top: 16px;">From the start, we knew we didn't want to build just another dashboard. We were designing for social media teams, so it needed to be both valuable and delightful to use. One of the most rewarding parts of the project was shaping the Community Growth Report, an experience that felt insightful, shareable, and fun.</p>
+      <p class="cs-body" style="margin-top: 16px;">Along the way, seemingly simple inputs like URLs and screenshots revealed various edge cases. Designing AI-powered products reinforced that edge cases exist everywhere—in the technology, the data, and the ways people interact with a product. Every release uncovers new behaviors, assumptions, and opportunities to learn. Building the product is only half the challenge; understanding how people actually use it is the other half.</p>
+    </div>
+
+    <!-- DIVIDER BEFORE FOOTER -->
+    <hr class="divider" style="margin: 64px 0 0;" />
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-label">You might want to checkout</span>
+      <div class="footer-links">
+        <a href="#">Resume</a>
+        <a href="https://www.linkedin.com/in/priyamakwana/" target="_blank">Linkedin</a>
+        <a href="https://priyamakwana.framer.website/" target="_blank">Archived portfolio</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <script>
+    document.querySelectorAll('.cs-scroll-container img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+    (function() {
+      let lastScroll = window.scrollY;
+      const sticky = document.getElementById('cs-nav-sticky');
+      window.addEventListener('scroll', function() {
+        const current = window.scrollY;
+        if (current < lastScroll && current > 80) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+        lastScroll = current;
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

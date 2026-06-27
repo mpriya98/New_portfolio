@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priya Makwana — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #1A1A1A;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      width: 698px;
+      margin: 0 auto;
+      padding: 100px 0 48px;
+    }
+
+    @media (max-width: 740px) {
+      .page { width: auto; padding: 40px 24px 80px; }
+    }
+
+    /* ── HEADER ── */
+    /* Bodyhighlighted: Inter 16px/600 #191919 */
+    .name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1.4;
+      color: #191919;
+    }
+
+    /* Body: Inter 16px/400 #606060 */
+    .designer-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #606060;
+      margin-top: 4px;
+    }
+
+    /* ── ABOUT ── */
+    /* Body: Inter 16px/400 #606060 */
+    .about {
+      margin-top: 52px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    /* ── SECTION LABEL ── */
+    /* Section label: Geist Mono 14px/400 #808080 */
+    .section-label {
+      display: block;
+      margin-top: 120px;
+      margin-bottom: 20px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+    }
+
+    /* ── BIG PROJECT CARDS ── */
+    .project-big {
+      margin-bottom: 100px;
+    }
+
+    .project-big-image {
+      width: 100%;
+      height: 436px;
+      border-radius: 21px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      transition: opacity 0.2s ease;
+    }
+
+    .project-big:hover .project-big-image {
+      opacity: 0.88;
+    }
+
+    .project-big:hover .project-big-name {
+      color: #404040;
+    }
+
+    .project-big-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .project-big:hover .project-big-image img {
+      transform: scale(1.02);
+    }
+
+    /* Card title: Inter 18px/600 #191919 */
+    .project-big-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      color: #191919;
+      margin-bottom: 7px;
+    }
+
+    /* Card body: Inter 16px/400 #606060 */
+    .project-big-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    /* ── SMALL PROJECT CARDS ── */
+    .project-small {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    .project-small-thumb {
+      width: 268px;
+      height: 168px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .project-small-thumb {
+      transition: opacity 0.2s ease;
+    }
+
+    .project-small:hover .project-small-thumb {
+      opacity: 0.88;
+    }
+
+    .project-small:hover .project-small-name {
+      color: #404040;
+    }
+
+    .project-small-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .project-small:hover .project-small-thumb img {
+      transform: scale(1.02);
+    }
+
+    .project-small-text {
+      flex: 1;
+      padding-top: 2px;
+    }
+
+    /* Card title: Inter 18px/600 #191919 */
+    .project-small-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: #191919;
+      margin-bottom: 6px;
+    }
+
+    /* Card body: Inter 16px/400 #606060 */
+    .project-small-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.6;
+    }
+
+    /* Chip text: Inter 14px/500 #808080 */
+    .coming-soon {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #808080;
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 88px;
+    }
+
+    /* Section label: Geist Mono 14px/400 #808080 */
+    .footer-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #808080;
+      border: 2px solid #F1F1F1;
+      border-radius: 100px;
+      padding: 12px 24px;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .footer-links a:hover {
+      border-color: #808080;
+      color: #191919;
+    }
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      cursor: zoom-out;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      cursor: default;
+    }
+    .project-small-thumb img { cursor: zoom-in; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="name">Priya Makwana</div>
+    <div class="designer-title">Product designer</div>
+
+    <!-- ABOUT -->
+    <p class="about">
+      I have been working as an independent contractor since last year. Here goes some more context about me and Plot.
+    </p>
+
+    <!-- ── RECENT WORK ── -->
+    <span class="section-label">Selected recent work (2025-26)</span>
+
+    <!-- Creator Sourcing -->
+    <div class="project-big">
+      <a href="creator-sourcing.html">
+        <div class="project-big-image" style="background:#AEBA98;">
+          <img src="images/creatorsourcing.svg" alt="Creator Sourcing" />
+        </div>
+      </a>
+      <a href="creator-sourcing.html" style="display:block;">
+        <div class="project-big-name">Creator Sourcing with precision</div>
+        <p class="project-big-desc">A feature to allows brands to find superfans and creators by niche, attributes, audience, geo, size, or brand affinity. It uses owned AI models to find creators who actually fit your brand needs.</p>
+      </a>
+    </div>
+
+    <!-- Custom Report -->
+    <div class="project-big">
+      <a href="custom-report.html">
+        <div class="project-big-image" style="background:#C9AFA8;">
+          <img src="images/customreport.svg" alt="Custom Reporting" />
+        </div>
+      </a>
+      <a href="custom-report.html" style="display:block;">
+        <div class="project-big-name">Custom Reporting to track anything</div>
+        <p class="project-big-desc">It let brands define exactly what they track — a campaign, a creator, brand activation, a topic — and build a persistent dashboard around it. Volume, sentiment, engagement, trends over time: all segmented, not averaged out.</p>
+      </a>
+    </div>
+
+    <!-- Outbound Engagement -->
+    <div class="project-big">
+      <a href="outbound-engagement.html">
+        <div class="project-big-image" style="background:#A4B5B0;">
+          <img src="images/outbound.svg" alt="Outbound Engagement" />
+        </div>
+      </a>
+      <a href="outbound-engagement.html" style="display:block;">
+        <div class="project-big-name">Outbound Engagement Tracking</div>
+        <p class="project-big-desc">It measures the volume and impact of your team's outbound comments and lets brands double down on what drives results.</p>
+      </a>
+    </div>
+
+    <!-- ── MORE WORK ── -->
+    <span class="section-label">More work (connect for more details)</span>
+
+    <!-- Brand Sentiment -->
+    <div class="project-small">
+      <a href="#">
+        <div class="project-small-thumb" style="background:#DBCCDE; padding: 10px 10px 0 10px; box-sizing: border-box;">
+          <img src="images/brand-sentiment.png" alt="Brand Sentiment" style="object-position: top;" />
+        </div>
+      </a>
+      <div class="project-small-text">
+        <div class="project-small-name">Brand Sentiment</div>
+        <p class="project-small-desc">It helps teams know what people are saying about their brand &amp; products, and why. Plot breaks down positive, neutral, and negative sentiment so they can track &amp; act on it.</p>
+      </div>
+    </div>
+
+    <!-- Engagement 2.0 -->
+    <div class="project-small">
+      <a href="#">
+        <div class="project-small-thumb" style="background:#F6E3C1; padding: 10px 10px 0 10px; box-sizing: border-box;">
+          <img src="images/engagement-feed.png" alt="Engagement Feed Redesign" style="object-position: top;" />
+        </div>
+      </a>
+      <div class="project-small-text">
+        <div class="project-small-name">Engagement Feed Redesign</div>
+        <p class="project-small-desc">It is a redesign of a feature that surfaces posts about brand, tagged or not, creator or UGC, so the team engages where it matters.</p>
+      </div>
+    </div>
+
+    <!-- Plot AI -->
+    <div class="project-small">
+      <a href="#">
+        <div class="project-small-thumb" style="background:#D9E3F3; padding: 10px 10px 0 10px; box-sizing: border-box;">
+          <img src="images/plot-ai.png" alt="Chat with Plot AI" style="object-position: top;" />
+        </div>
+      </a>
+      <div class="project-small-text">
+        <div class="project-small-name">Chat with Plot AI</div>
+        <p class="project-small-desc">AI Chat is a conversational interface grounded in Plot's video-native data — Ask questions in plain language, get answers rooted in your brand's actual data, and iterate like a personal analyst on demand.</p>
+      </div>
+    </div>
+
+    <!-- ── AI EXPERIMENTS ── -->
+    <span class="section-label">AI experiments</span>
+
+    <!-- Meal planning & caring -->
+    <div class="project-small">
+      <a href="meal-planner.html">
+        <div class="project-small-thumb" style="background:#D4D8C3; padding: 20px 10px 0 10px; box-sizing: border-box;">
+          <img src="images/hearth-hero.png" alt="Meal planning and tracking" style="object-fit: contain; object-position: top;" />
+        </div>
+      </a>
+      <div class="project-small-text">
+        <a href="meal-planner.html" style="display:block;">
+          <div class="project-small-name">Meal planning and tracking</div>
+          <p class="project-small-desc">A web app built around awareness, not calorie math. Track what you eat and what you need to buy, understand your patterns, and build a healthier relationship with food.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Be a villager! -->
+    <div class="project-small">
+      <a href="#">
+        <div class="project-small-thumb" style="background:#DCC0A8;"></div>
+      </a>
+      <div class="project-small-text">
+        <div class="project-small-name">Be a villager!</div>
+        <p class="project-small-desc">It helps teams know what people are saying about their</p>
+        <span class="coming-soon">coming soon....</span>
+      </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <div class="footer">
+      <span class="footer-label">You might want to checkout</span>
+      <div class="footer-links">
+        <a href="#">Resume</a>
+        <a href="https://www.linkedin.com/in/priyamakwana/" target="_blank">Linkedin</a>
+        <a href="https://priyamakwana.framer.website/" target="_blank">Archived portfolio</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <script>
+    document.querySelectorAll('.project-small-thumb img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Reports — Priya Makwana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #F5F4F0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #191919;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      width: 698px;
+      margin: 0 auto;
+      padding: 64px 0 80px;
+    }
+
+    @media (max-width: 740px) {
+      .page { width: auto; padding: 40px 24px 80px; }
+    }
+
+    /* ── NAV ── */
+    .cs-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .cs-nav a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      transition: color 0.15s;
+    }
+
+    .cs-nav a:hover { color: #191919; }
+
+    .cs-nav-sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(245, 244, 240, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .cs-nav-sticky.visible { transform: translateY(0); }
+    .cs-nav-sticky-inner {
+      width: 698px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    @media (max-width: 740px) {
+      .cs-nav-sticky-inner { width: auto; padding: 16px 24px; }
+    }
+    .cs-nav-sticky a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .cs-nav-sticky a:hover { color: #191919; }
+
+    /* ── HERO ── */
+    .cs-title {
+      font-size: 38px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    /* ── BODY TEXT ── */
+    .cs-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-body + .cs-body {
+      margin-top: 16px;
+    }
+
+    .cs-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    /* ── IMAGES ── */
+    .cs-img {
+      width: 100%;
+      border-radius: 21px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .cs-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── SCREEN TITLE ── */
+    .cs-screen-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 16px;
+    }
+
+    /* ── SCROLLABLE SCREEN CONTAINER ── */
+    .cs-scroll-container {
+      width: 100%;
+      height: 600px;
+      border-radius: 21px;
+      background: #EED8D4;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-bottom: 24px;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar-thumb {
+      background: #D4B8B4;
+      border-radius: 100px;
+    }
+
+    .cs-scroll-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      padding: 30px;
+    }
+
+    /* ── PLACEHOLDER ── */
+    .cs-placeholder-img {
+      background: #EDECEA;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cs-placeholder-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #B8B5B0;
+    }
+
+    /* ── METADATA ── */
+    .cs-meta {
+      display: flex;
+      gap: 0;
+      margin-top: 32px;
+      margin-bottom: 64px;
+    }
+
+    .cs-meta-col {
+      padding-right: 48px;
+    }
+
+    .cs-meta-col:last-child {
+      flex: 1;
+      padding-right: 0;
+    }
+
+    .cs-meta-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 8px;
+    }
+
+    .cs-meta-value {
+      display: block;
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.6;
+    }
+
+    .cs-meta-value a {
+      color: #606060;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cs-meta-value a:hover { color: #191919; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #E0DED9;
+      margin: 64px 0;
+    }
+
+    /* ── DOT DIVIDER ── */
+    .dot-divider {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 80px 0;
+    }
+
+    .dot-divider span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D9D7D2;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .cs-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    /* ── STEP HEADING ── */
+    .cs-step-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    /* ── DIVE-IN TRANSITION ── */
+    .cs-dive-in {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 120px;
+    }
+
+    /* ── STEPS ── */
+    .cs-step {
+      margin-bottom: 120px;
+    }
+
+    .cs-annotation {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-annotation + .cs-annotation {
+      margin-top: 16px;
+    }
+
+    /* ── CALLOUT ROWS ── */
+    .cs-callout-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    .cs-callout--full {
+      grid-column: 1 / -1;
+    }
+
+    .cs-callout-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+    }
+
+    .cs-callout-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-callout-body + .cs-callout-body {
+      margin-top: 16px;
+    }
+
+    .cs-callout-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    .cs-callout-list {
+      list-style: none;
+      margin: 8px 0;
+    }
+
+    .cs-callout-list li {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .cs-callout-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #808080;
+    }
+
+    /* ── TRACKING USE-CASE CARDS ── */
+    .cs-track-grid {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      align-items: flex-start;
+    }
+
+    .cs-track-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cs-track-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .cs-track-brand {
+      font-size: 14px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 8px;
+    }
+
+    .cs-track-type {
+      font-weight: 400;
+      color: #808080;
+    }
+
+    .cs-track-quote {
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.55;
+    }
+
+    /* ── QUOTE CARDS ── */
+    .cs-quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .cs-quote-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .cs-quote-brand {
+      font-size: 14px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 8px;
+    }
+
+    .cs-quote-text {
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.55;
+    }
+
+    /* ── REFLECTIONS ── */
+    .cs-reflections {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .cs-reflection-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .cs-reflection-body {
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    .footer { margin-top: 120px; }
+
+    .footer-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      margin-bottom: 24px;
+    }
+
+    .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #808080;
+      border: 2px solid #E0DED9;
+      border-radius: 100px;
+      padding: 12px 24px;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .footer-links a:hover { border-color: #808080; color: #191919; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      cursor: zoom-out;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      cursor: default;
+    }
+    .cs-scroll-container img { cursor: zoom-in; }
+  </style>
+</head>
+<body>
+  <nav class="cs-nav-sticky" id="cs-nav-sticky">
+    <div class="cs-nav-sticky-inner">
+      <a href="index.html">← Home</a>
+      <a href="outbound-engagement.html">Next project →</a>
+    </div>
+  </nav>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav class="cs-nav">
+      <a href="index.html">← Home</a>
+      <a href="outbound-engagement.html">Next project →</a>
+    </nav>
+
+    <!-- HERO -->
+    <h1 class="cs-title">Custom report tracking</h1>
+    <p class="cs-body">Custom Reports let brands define exactly what they want to track—whether a gifting campaign, creator partnership, or product launch—and create a persistent dashboard around it. Using Plot's video intelligence, the system continuously surfaces relevant content based on what is visible and spoken in videos, not just captions, hashtags, or brand tags.</p>
+
+    <div class="cs-callout-row" style="margin-top: 48px; grid-template-columns: 0.8fr 1.2fr;">
+      <div>
+        <span class="cs-callout-label">What problem it solved</span>
+        <p class="cs-body">This solved a major visibility gap: marketing teams had no reliable way to track what creators actually posted, especially when content went untagged.</p>
+      </div>
+      <div>
+        <span class="cs-callout-label">Impact</span>
+        <p class="cs-body">Brands uncovered 3× more relevant campaign content on average, giving them a complete view of campaign, event, and use-case performance. As a result, report creation increased 8× compared to the previous topic-tracking experience.</p>
+      </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="cs-img" style="margin-top: 32px;">
+      <img src="images/custom-report/custom%20reporting.svg?v=2" alt="Custom Reports interface" />
+    </div>
+
+    <!-- METADATA -->
+    <div class="cs-meta">
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">Collaborators</span>
+        <span class="cs-meta-value">Rhea (Designer)</span>
+        <span class="cs-meta-value">Lap Nguyen (Engineer)</span>
+      </div>
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">Timeline</span>
+        <span class="cs-meta-value">3–4 months</span>
+      </div>
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">My Role</span>
+        <span class="cs-meta-value">Owned the report exploration experience and redesign of report creation, collaborating with product, engineering and customer success to understand customer pain points and translate them into product improvements.</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- WHAT BRANDS WANTED TO TRACK -->
+    <div style="margin-bottom: 120px;">
+      <h2 class="cs-heading">What brands wanted to track?</h2>
+      <p class="cs-body">As we spoke with more brands, a consistent set of tracking needs emerged:</p>
+      <div class="cs-track-grid">
+        <div class="cs-track-col">
+          <div class="cs-track-card">
+            <div class="cs-track-brand">Hinge <span class="cs-track-type">(Usecase tracking)</span></div>
+            <p class="cs-track-quote">"Hinge first date stories /success stories (people who are married)."</p>
+          </div>
+          <div class="cs-track-card">
+            <div class="cs-track-brand">Benefit cosmetic <span class="cs-track-type">(Gifting)</span></div>
+            <p class="cs-track-quote">"Track all creators who posted after receiving a Benefit professional gifting package"</p>
+          </div>
+          <div class="cs-track-card">
+            <div class="cs-track-brand">Hinge <span class="cs-track-type">(Event/ creator tracking)</span></div>
+            <p class="cs-track-quote">"Surface every creator who posted from our launch event"</p>
+          </div>
+        </div>
+        <div class="cs-track-col">
+          <div class="cs-track-card">
+            <div class="cs-track-brand">ChatGPT <span class="cs-track-type">(Usecase tracking)</span></div>
+            <p class="cs-track-quote">"the breakdown of people who are using it for different use cases. (eg: job search, fitness, wealth creation)"</p>
+          </div>
+          <div class="cs-track-card">
+            <div class="cs-track-brand">Fabletics <span class="cs-track-type">(Benchmarking)</span></div>
+            <p class="cs-track-quote">"Use this campaign as a benchmark — compare it against the one we ran last quarter"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVE IN -->
+    <p class="cs-dive-in">So we built a way to track all of it.</p>
+
+    <!-- STEP 1: REPORT COVER PAGE -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Custom report library</h2>
+
+      <p class="cs-annotation">Brands can create different types of reports giving them a quick performance snapshot for each report, surfacing key metrics such as content volume, creator participation, reach, and EMV so they can identify what's performing well without digging into individual reports.</p>
+
+      <div class="cs-scroll-container" style="margin-top: 32px; height: 477px;">
+        <img src="images/custom-report/custom%20report%20cover%20page.png" alt="Report cover page — all campaigns view" />
+      </div>
+
+    </div>
+
+    <!-- STEP 3: REPORT DETAIL -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">The custom report</h2>
+
+      <p class="cs-annotation">Each report opens into three tabs:</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px;">
+        <div style="background: rgba(255,255,255,0.7); border-radius: 20px; padding: 24px;">
+          <span class="cs-meta-label">Analytics</span>
+          <span class="cs-meta-value" style="margin-top: 16px;">Overall performance at a glance</span>
+        </div>
+        <div style="background: rgba(255,255,255,0.7); border-radius: 20px; padding: 24px;">
+          <span class="cs-meta-label">Creator Partnerships</span>
+          <span class="cs-meta-value" style="margin-top: 16px;">Delivery tracking, visible only when creators are added to the report</span>
+        </div>
+        <div style="background: rgba(255,255,255,0.7); border-radius: 20px; padding: 24px;">
+          <span class="cs-meta-label">All Matched Posts</span>
+          <span class="cs-meta-value" style="margin-top: 16px;">The full feed of content matched to this report</span>
+        </div>
+      </div>
+
+
+      <!-- Analytics tab -->
+      <h3 class="cs-heading" style="margin-top: 60px;">Overall analytics</h3>
+      <p class="cs-annotation" style="margin-top: 8px;">The Analytics tab answers the question every marketing team has before a leadership meeting: <strong style="font-weight: 800;">what's actually performing, and can I stand behind these numbers?</strong></p>
+      <div class="cs-scroll-container" style="margin-top: 24px;">
+        <img src="images/custom-report/Analytics%20tab.png" alt="Report detail — Analytics tab" />
+      </div>
+
+      <p class="cs-annotation" style="margin-top: 24px;">Performance across creator partnerships, organic UGC, and owned content is unified in one view — filterable, comparable, and exportable. Here's what they can dig into:</p>
+      <ul class="cs-annotation" style="margin-top: 32px; padding-left: 20px; display: flex; flex-direction: column; gap: 10px;">
+        <li><strong>Report summary</strong> — AI-generated performance read with a link to the full AI report</li>
+        <li><strong>Overall performance metrics</strong> — mentions, views, engagement, and EMV by source (Organic UGC, Creator Partnerships, Owned)</li>
+        <li><strong>Sentiment breakdown</strong> — positive, neutral, and negative split with drill-through to the content driving each signal</li>
+        <li><strong>Key insights</strong> — auto-surfaced highlights so teams don't have to scan for what matters</li>
+        <li><strong>Platform breakdown</strong> — performance by channel</li>
+        <li><strong>Demographics</strong> — age, gender, language, and country to understand who the content is reaching</li>
+      </ul>
+
+      <!-- Creator partnerships section -->
+      <h2 class="cs-heading" style="margin-top: 120px;">Tracking Creator partnerships</h2>
+      <p class="cs-body">When a brand sends out 50 gifting packages, there's no reliable way to know if the creator posted or what they said about it. Creator and gifting programs become nearly impossible to measure — ROI is invisible, and the only fallback is manually checking each creator's profile.</p>
+      <p class="cs-body" style="margin-top: 16px;">Creator Partnerships gives that visibility back. Brands add the creators they're working with, and video intelligence picks up every related post they publish — tagged or not.</p>
+
+      <h3 class="cs-screen-title" style="margin-top: 48px; font-size: 20px;">All creator partnerships performance</h3>
+      <div class="cs-scroll-container">
+        <img src="images/custom-report/Creator%20partnershiops.png" alt="Creator partnerships — main screen" />
+      </div>
+
+      <p class="cs-annotation" style="margin-top: 24px;">It surfaces overall partnership performance and a breakdown of how many creators posted, how many posts went live, how they performed — with a per-creator view when you need to go deeper.</p>
+
+      <!-- Creator profile — Current tracking -->
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Creator performance — Active collaboration</h3>
+      <div class="cs-scroll-container">
+        <img src="images/custom-report/Creator%20profile%20-%20Current%20tracking.png?v=3" alt="Creator profile — Current tracking" />
+      </div>
+
+      <p class="cs-annotation" style="margin-top: 24px;">Knowing which creators are actually helping your brand grow and being able to prove it changes how teams make decisions.</p>
+      <p class="cs-annotation" style="margin-top: 16px;">Clicking into a creator gives you exactly that: their performance isolated, their posts surfaced, and an AI search bar to find specific content without scrolling.</p>
+
+      <!-- Creator profile — Past collaborations -->
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Creator performance — Past collaboration</h3>
+      <div class="cs-scroll-container">
+        <img src="images/custom-report/Creator%20profile%20-%20Past%20collaborations.png?v=2" alt="Creator profile — Past collaborations" />
+      </div>
+
+      <div class="cs-callout-row">
+        <div class="cs-callout--full">
+          <p class="cs-callout-body">The Past Collaborations tab surfaces a creator's full history with the brand—from past campaigns and content output to sentiment, engagement, and EMV trends over time. It transforms campaign reporting from a one-off snapshot into a long-term record of creator performance that grows richer with every collaboration.</p>
+        </div>
+      </div>
+
+      <!-- Content tab -->
+      <h2 class="cs-heading" style="margin-top: 120px;">All matched content</h2>
+      <p style="font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; color: #191919; margin-top: 6px; margin-bottom: 24px;">(Creator partnership, Organic UGC &amp; Owned content)</p>
+      <div class="cs-scroll-container">
+        <img src="images/custom-report/All%20matched%20posts.png" alt="Report detail — All matched posts" />
+      </div>
+
+      <p class="cs-annotation" style="margin-top: 24px;">Every post matched to the report lives here: creator partnerships, organic UGC, and owned content in one feed. Filter by platform, post type, or date to find what you're looking for, or search directly. Open any post to see the video behind the metric.</p>
+      <p class="cs-annotation" style="margin-top: 16px;">It's the evidence layer, the content that makes the analytics real.</p>
+    </div>
+
+    <!-- STEP 3: ONBOARDING -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Onboarding Experience — How we reduced drop-offs</h2>
+
+      <p class="cs-annotation">Onboarding experience walked users through a linear flow from describing what they wanted to track, to reviewing everything before setting it up.</p>
+      <p class="cs-annotation" style="margin-top: 16px; color: #808080;">Steps included: Add details → Set timeline → Add creators → Add deliverables → Review</p>
+      <p class="cs-annotation" style="margin-top: 16px;">The first version was designed and shipped by another fellow designer on the team, but real usage surfaced a set of problems that needed rethinking.</p>
+
+      <!-- The Problem -->
+      <div style="margin-top: 48px;">
+        <span class="cs-callout-label">The Problem</span>
+        <ul class="cs-annotation" style="margin-top: 16px; padding-left: 20px; display: flex; flex-direction: column; gap: 16px;">
+          <li><strong>Drop-offs mid-setup</strong> — the steps weren't clear enough, and users abandoned the flow before completing it.</li>
+          <li><strong>Errors with no way forward</strong> — when something broke, users couldn't understand why or how to fix it.</li>
+          <li><strong>A blank prompt, too early</strong> — describing what to track sounds simple, but most teams didn't know the answer until content was already coming in.</li>
+        </ul>
+      </div>
+
+      <!-- Step 1 -->
+      <h2 class="cs-heading" style="margin-top: 80px;">Step 1 — Add details</h2>
+      <p class="cs-annotation" style="margin-top: 12px;">The first step of the onboarding asked brands to name their report and describe what they wanted to track.</p>
+
+      <h3 class="cs-screen-title" style="margin-top: 48px; font-size: 20px;">Before</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: 455px;">
+        <img src="images/custom-report/add%20details%20before.png" alt="Step 1 — Before" />
+      </div>
+      <span class="cs-callout-label" style="display: block; margin-top: 24px;">Problem</span>
+      <p class="cs-annotation" style="margin-top: 12px;">Brands described what the report should track in a single open text field — no guidance, no guardrails. The AI matched literally. Too broad, and irrelevant posts flooded in. Too specific, and valid content got missed. Feedback only surfaced once data came in. By then, the report had already been running on a broken prompt.</p>
+
+      <h3 class="cs-screen-title" style="margin-top: 48px; font-size: 20px;">After</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: 455px;">
+        <img src="images/custom-report/add%20details%20after.png" alt="Step 1 — After" />
+      </div>
+      <span class="cs-callout-label" style="display: block; margin-top: 24px;">Solution</span>
+      <p class="cs-annotation" style="margin-top: 12px;">Rather than asking brands to write a prompt from scratch, the redesign replaced the open text field with a guided setup. Structured questions about the campaign, product, content type, what to include or exclude, are fed directly into the AI matching logic. Brands could see exactly what the report would track before it went live, and edit it if something looked off.</p>
+
+      <!-- Step 2 -->
+      <h2 class="cs-heading" style="margin-top: 80px;">Step 2 — Add creators</h2>
+      <p class="cs-annotation" style="margin-top: 12px;">The Add Creators step was where brands uploaded the creators they were working with — via CSV or manually — so AI knew whose content to track.</p>
+
+      <h3 class="cs-screen-title" style="margin-top: 60px; font-size: 20px;">Upload CSV to add creators</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: 455px;">
+        <img src="images/custom-report/add%20creator%20problem.png" alt="Step 2 — Add creators" />
+      </div>
+
+      <span class="cs-callout-label" style="display: block; margin-top: 24px;">Problem</span>
+      <p class="cs-annotation" style="margin-top: 12px;">The existing flow required brands to upload a CSV of creators. Any mismatch in format, extra columns, or encoding issues caused silent failures — no clear error, no way forward. Most users hit a wall, gave up, and sent the file over Slack asking the team to set it up for them. It became a support bottleneck and a consistent drop-off point in the onboarding flow.</p>
+
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Reviewing added creators</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: 455px;">
+        <img src="images/custom-report/review%20creators.png" alt="Step 2 — Reviewing creators" />
+      </div>
+
+      <h3 class="cs-screen-title" style="margin-top: 80px; font-size: 20px;">Addressing edge cases</h3>
+      <div class="cs-scroll-container" style="margin-top: 12px; height: auto; overflow-y: visible;">
+        <img src="images/custom-report/add%20creator%20iteration.png" alt="Step 2 — Iterations" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 24px; margin-top: 24px;">
+        <div>
+          <span class="cs-callout-label">Process</span>
+          <p class="cs-annotation" style="margin-top: 12px;">Through customer success conversations, we learned CSV formatting wasn't as intuitive as assumed. Users made mistakes they didn't recognise as mistakes — but the LLM needed data in a specific structure, so small errors broke the pipeline silently.</p>
+        </div>
+        <div>
+          <span class="cs-callout-label">Solution</span>
+          <p class="cs-annotation" style="margin-top: 12px;">We mapped failure points across three layers:</p>
+          <ul class="cs-annotation" style="margin-top: 10px; padding-left: 20px; display: flex; flex-direction: column; gap: 4px;">
+            <li>File-level formatting</li>
+            <li>LLM detection confidence</li>
+            <li>Manual override errors</li>
+          </ul>
+          <p class="cs-annotation" style="margin-top: 12px;">The redesign caught errors at each layer — surfacing them early, explaining them clearly, and letting users fix them without starting over.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <h2 class="cs-heading" style="margin-top: 80px;">Step 3 — Add deliverables</h2>
+      <p class="cs-annotation" style="margin-top: 8px;">The step we kept revisiting — and eventually cut entirely</p>
+      <p class="cs-annotation" style="margin-top: 16px;">This step asked brands to define what each creator was contracted to deliver — platform, format, and quantity. The underlying logic was complex: a deliverable could be one Instagram Reel OR one TikTok, or both together.</p>
+
+      <div class="cs-scroll-container" style="margin-top: 24px; height: 455px;">
+        <img src="images/custom-report/deliverable%20iteration.png" alt="Step 3 — Deliverable iterations" />
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+        <div>
+          <span class="cs-callout-label">Challenges</span>
+          <ul class="cs-annotation" style="margin-top: 12px; padding-left: 20px; display: flex; flex-direction: column; gap: 16px;">
+            <li>Representing AND/OR conditions in a UI that was intuitive proved harder with every iteration — and asking brands to reason about it upfront made it worse</li>
+            <li>The LLM couldn't reliably distinguish contracted deliverables from posts creators made out of goodwill, which undermined accuracy across the board</li>
+          </ul>
+        </div>
+        <div>
+          <span class="cs-callout-label">The call</span>
+          <p class="cs-annotation" style="margin-top: 12px;">After multiple rounds of iteration to address these challenges, the step was cut entirely — from onboarding and Creator Partnerships. It was a hard call, with ripple effects across the product.</p>
+          <p class="cs-annotation" style="margin-top: 16px;">We realised retaining trust in the product mattered more than shipping a feature that introduced doubt.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CLOSING SENTENCE -->
+    <p class="cs-annotation" style="margin-top: 48px;">As we iterated, steps merged, and the flow tightened around what actually mattered. The final onboarding was leaner — because each round taught us what was essential and what was in the way.</p>
+
+    <!-- DOT DIVIDER -->
+    <div class="dot-divider">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- REFLECTIONS -->
+    <div style="margin-bottom: 0;">
+      <h2 class="cs-heading">Reflections</h2>
+      <div class="cs-reflections">
+        <div>
+          <span class="cs-reflection-label">Knowing when to stop</span>
+          <p class="cs-reflection-body">The deliverable step went through more rounds than anything else — and the final call was to cut it. Better upfront alignment might have saved time. But without going through it, we wouldn't have uncovered the edge cases, understood the LLM's limits, or seen what ambiguous data was doing to user trust. That time wasn't wasted. It was how we found the line.</p>
+        </div>
+        <div>
+          <span class="cs-reflection-label">Designing for errors</span>
+          <p class="cs-reflection-body">The CSV flow pushed me to design for every possible mistake. At some point, that became a problem in itself — blocking users, adding steps, making the experience feel more fragile than it was. Sometimes the right call is to catch what critically matters and let users find their way through the rest.</p>
+        </div>
+        <div>
+          <span class="cs-reflection-label">Trust in data: a design problem</span>
+          <p class="cs-reflection-body">We saw vague prompts returned irrelevant posts — and users didn't question the prompt, they questioned the product. The deliverable step hit the same wall: the LLM couldn't reliably tell contracted posts from organic ones yet. With AI, the gap between what the system does and what users expect is a design problem. Leave it unaddressed, and trust doesn't recover quietly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER BEFORE FOOTER -->
+    <hr class="divider" style="margin: 64px 0 0;" />
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-label">You might want to checkout</span>
+      <div class="footer-links">
+        <a href="#">Resume</a>
+        <a href="https://www.linkedin.com/in/priyamakwana/" target="_blank">Linkedin</a>
+        <a href="https://priyamakwana.framer.website/" target="_blank">Archived portfolio</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <script>
+    document.querySelectorAll('.cs-scroll-container img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+    (function() {
+      let lastScroll = window.scrollY;
+      const sticky = document.getElementById('cs-nav-sticky');
+      window.addEventListener('scroll', function() {
+        const current = window.scrollY;
+        if (current < lastScroll && current > 80) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+        lastScroll = current;
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

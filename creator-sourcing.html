@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creator Sourcing — Priya Makwana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #F5F4F0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #191919;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      width: 698px;
+      margin: 0 auto;
+      padding: 64px 0 80px;
+    }
+
+    @media (max-width: 740px) {
+      .page { width: auto; padding: 40px 24px 80px; }
+    }
+
+    /* ── NAV ── */
+    .cs-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .cs-nav a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      transition: color 0.15s;
+    }
+
+    .cs-nav a:hover { color: #191919; }
+
+    .cs-nav-sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(245, 244, 240, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .cs-nav-sticky.visible { transform: translateY(0); }
+    .cs-nav-sticky-inner {
+      width: 698px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    @media (max-width: 740px) {
+      .cs-nav-sticky-inner { width: auto; padding: 16px 24px; }
+    }
+    .cs-nav-sticky a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .cs-nav-sticky a:hover { color: #191919; }
+
+    /* ── HERO ── */
+    .cs-title {
+      font-size: 38px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    /* ── BODY TEXT ── */
+    .cs-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-body + .cs-body {
+      margin-top: 16px;
+    }
+
+    .cs-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    /* ── IMAGES ── */
+    .cs-img {
+      width: 100%;
+      border-radius: 21px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .cs-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── METADATA ── */
+    .cs-meta {
+      display: flex;
+      gap: 0;
+      margin-top: 32px;
+      margin-bottom: 64px;
+    }
+
+    .cs-meta-col {
+      padding-right: 48px;
+    }
+
+    .cs-meta-col:last-child {
+      flex: 1;
+      padding-right: 0;
+    }
+
+    .cs-meta-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 8px;
+    }
+
+    .cs-meta-value {
+      display: block;
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.6;
+    }
+
+    .cs-meta-value a {
+      color: #606060;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cs-meta-value a:hover { color: #191919; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #E0DED9;
+      margin: 64px 0;
+    }
+
+    /* ── DOT DIVIDER ── */
+    .dot-divider {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 80px 0;
+    }
+
+    .dot-divider span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D9D7D2;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .cs-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    /* ── STEP HEADING ── */
+    .cs-step-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    /* ── QUOTE CARDS ── */
+    .cs-quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .cs-quote-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .cs-quote-brand {
+      font-size: 14px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 8px;
+    }
+
+    .cs-quote-text {
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.5;
+    }
+
+    /* ── DIVE-IN TRANSITION ── */
+    .cs-dive-in {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #808080;
+      margin-bottom: 120px;
+    }
+
+    /* ── STEPS ── */
+    .cs-step {
+      margin-bottom: 120px;
+    }
+
+    .cs-annotation {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-annotation + .cs-annotation {
+      margin-top: 16px;
+    }
+
+    /* ── CALLOUT ROWS (plain text, no card) ── */
+    .cs-callout-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    .cs-callout--full {
+      grid-column: 1 / -1;
+    }
+
+    .cs-callout-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+    }
+
+    .cs-callout-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-callout-body + .cs-callout-body {
+      margin-top: 16px;
+    }
+
+    .cs-callout-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    /* Bullet list inside callouts */
+    .cs-callout-list {
+      list-style: none;
+      margin: 8px 0;
+    }
+
+    .cs-callout-list li {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .cs-callout-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #808080;
+    }
+
+    /* ── VETTING QUESTION CARDS ── */
+    .cs-vetting-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+      margin-bottom: 32px;
+    }
+
+    .cs-vetting-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 16px 24px;
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.5;
+    }
+
+    /* ── REFLECTIONS ── */
+    .cs-reflections {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .cs-reflection-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .cs-reflection-body {
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    .footer { margin-top: 120px; }
+
+    .footer-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      margin-bottom: 24px;
+    }
+
+    .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #808080;
+      border: 2px solid #E0DED9;
+      border-radius: 100px;
+      padding: 12px 24px;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .footer-links a:hover { border-color: #808080; color: #191919; }
+  </style>
+</head>
+<body>
+  <nav class="cs-nav-sticky" id="cs-nav-sticky">
+    <div class="cs-nav-sticky-inner">
+      <a href="index.html">← Home</a>
+      <a href="custom-report.html">Next project →</a>
+    </div>
+  </nav>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav class="cs-nav">
+      <a href="index.html">← Home</a>
+      <a href="custom-report.html">Next project →</a>
+    </nav>
+
+    <!-- HERO -->
+    <h1 class="cs-title">Creator Sourcing with precision</h1>
+    <p class="cs-body">Creator Sourcing helps brands discover the right creators through AI-powered search. Brands can simply describe their ideal creator in natural language—by niche, audience, geography, creator size, brand affinity, or custom attributes—and receive a curated list of best-match creators.</p>
+    <p class="cs-body">The beta was launched to a select group of enterprise customers and received strong early validation from brands including Fenty Beauty, Benefit Cosmetics, Fabletics, and Victoria's Secret.</p>
+
+    <!-- HERO IMAGE -->
+    <div class="cs-img" style="margin-top: 32px;">
+      <img src="images/creator-sourcing/creator%20sourcing.svg" alt="Creator Sourcing interface" />
+    </div>
+
+    <!-- METADATA -->
+    <div class="cs-meta">
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">Collaborators</span>
+        <span class="cs-meta-value"><a href="https://www.linkedin.com/in/reymehhh/" target="_blank">Rhea</a> (Designer)</span>
+        <span class="cs-meta-value"><a href="https://www.linkedin.com/in/minkijung/" target="_blank">Minki</a> (Engineer)</span>
+      </div>
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">Timeline</span>
+        <span class="cs-meta-value">4 months</span>
+      </div>
+      <div class="cs-meta-col">
+        <span class="cs-meta-label">My Role</span>
+        <span class="cs-meta-value">Led the end-to-end design, collaborating closely with Engineering to design within AI constraints and iterating with feedback from Rhea and the product team.</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- PROBLEM -->
+    <div style="margin-bottom: 120px;">
+      <h2 class="cs-heading">What problem is it solving?</h2>
+      <p class="cs-body">Brand partnerships are one of the highest-leverage yet the most manual thing a marketing team does. Even well-resourced agencies were capping at roughly 20 creator partnerships per month.</p>
+      <p class="cs-body">The challenge was to identify the best-fit the creator at scale. Existing tools completely broke down the moment brands had specific, contextual criteria like these:</p>
+      <div class="cs-quote-grid">
+        <div class="cs-quote-card">
+          <div class="cs-quote-brand">Fenty beauty</div>
+          <p class="cs-quote-text">"Curly-haired creators for a new curling cream"</p>
+        </div>
+        <div class="cs-quote-card">
+          <div class="cs-quote-brand">Hinge</div>
+          <p class="cs-quote-text">"LGBTQ creators who met their partner while using Hinge"</p>
+        </div>
+        <div class="cs-quote-card">
+          <div class="cs-quote-brand">Open AI</div>
+          <p class="cs-quote-text">"College students who use ChatGPT for studying and daily life"</p>
+        </div>
+        <div class="cs-quote-card">
+          <div class="cs-quote-brand">Anthropologie</div>
+          <p class="cs-quote-text">"Mother-daughter duo creators for mother's day event"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div style="margin-bottom: 24px;">
+      <h2 class="cs-heading">Summary</h2>
+      <p class="cs-body">The project spanned two connected phases:<br /><strong>Discovery</strong> - finding the right creator<br /><strong>Vetting</strong> - determining whether they're credible, brand-safe, and worth partnering with</p>
+      <p class="cs-body" style="margin-top: 24px;">The work that mattered most wasn't the interface. It was figuring out how to represent an AI system's uncertainty honestly, without making users distrust results that were actually right. That tension between giving users confidence and being honest about the system's limits, shaped almost every decision in this case study.</p>
+    </div>
+
+    <!-- DIVE IN -->
+    <p class="cs-dive-in">Let's dive into it!</p>
+
+    <!-- STEP 1: ENTERING PROMPT -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Entering prompt to find creators</h2>
+      <div class="cs-img">
+        <img src="images/creator-sourcing/Entering%20prompt%20to%20find%20creators.svg" alt="Entering prompt to find creators" />
+      </div>
+      <p class="cs-annotation">The team had multiple discovery sessions with different brands to understand how they evaluate creator fit, the types of prompts they would use, and their expectations from the results. These insights helped me design the prompt experience, edge cases, and the system's handling of queries ranging from broad to highly specific.</p>
+    </div>
+
+    <!-- STEP 2: REVIEWING CRITERIA -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Reviewing criteria breakdown from the prompt</h2>
+
+      <!-- Part A: Criteria review -->
+      <div class="cs-img">
+        <img src="images/creator-sourcing/MacBook%20Air%20-%20785.svg" alt="Criteria review — Does this look right?" />
+      </div>
+      <p class="cs-annotation">The prompt is broken down into discrete, evaluable criteria that users can review and prioritize as must-haves or nice-to-haves. AI flags criteria that are either too vague or cannot be reliably evaluated, allowing users to update, or remove them before running the search.</p>
+
+      <!-- Part B: Edge case -->
+      <div class="cs-img" style="margin-top: 80px;">
+        <img src="images/creator-sourcing/Reviewing%20criteria%20breakdown%20from%20the%20prompt%20-%20%20ai%20isn't%20always%20rightedge%20case.svg" alt="Edge case — AI isn't always right" />
+      </div>
+      <div class="cs-callout-row">
+        <div>
+          <span class="cs-callout-label">Edge case — AI isn't always right</span>
+          <p class="cs-callout-body">Criteria that seem clear to users can sometimes be misinterpreted or flagged incorrectly by AI. To avoid creating a frustrating experience, we gave users the ability to override AI recommendations rather than blocking them from proceeding.</p>
+        </div>
+        <div>
+          <span class="cs-callout-label">Tradeoff</span>
+          <p class="cs-callout-body">Overridden criteria could lead to low quality results. However, we chose to prioritise user control and trust. A less-than-perfect result is easier to recover from than a system that incorrectly rejects valid intent and prevents users from moving forward.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: REVIEWING SAMPLE CREATORS -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Reviewing sample creators & giving feedback for better result quality</h2>
+      <div class="cs-img">
+        <img src="images/creator-sourcing/Reviewing%20sample%20creators%20%26%20giving%20feedback%20for%20better%20result%20quality.svg" alt="Reviewing sample creators and giving feedback" />
+      </div>
+      <p class="cs-annotation">Before viewing the full results, users review a set of five creator profiles. The flow follows a simple loop:</p>
+      <p class="cs-annotation">Review → Approve/Reject → Feedback → Refine Criteria → New Recommendations.</p>
+      <div class="cs-img" style="margin-top: 80px;">
+        <img src="images/creator-sourcing/feedback%20screen.svg" alt="Rejection feedback screen" />
+      </div>
+      <div class="cs-callout-row">
+        <div class="cs-callout--full">
+          <span class="cs-callout-label">Concern</span>
+          <p class="cs-callout-body">Each creator rejection triggered another feedback cycle, allowing the system to refine criteria, better understand user intent, and improve recommendation quality. While this helped bridge the gap between what users asked for and what they actually wanted, it also created an endless-loop feeling that left many users frustrated. The team was divided between 2 different approaches.</p>
+        </div>
+      </div>
+      <div class="cs-callout-row" style="margin-top: 32px;">
+        <div>
+          <span class="cs-callout-label">Approach 1</span>
+          <p class="cs-callout-body">Let them land in results and learn by doing.. Seeing what their prompt returned teaches them how to ask better than any guided loop would.</p>
+        </div>
+        <div>
+          <span class="cs-callout-label">Approach 2</span>
+          <p class="cs-callout-body">Keep showing sample sets until all 5 are approved before the full run commits. More signal → Sharper results → More trust.</p>
+        </div>
+      </div>
+      <div class="cs-img" style="margin-top: 80px;">
+        <img src="images/creator-sourcing/do%20one%20more%20round.svg" alt="Do one more round soft nudge" />
+      </div>
+      <div class="cs-callout-row">
+        <div class="cs-callout--full">
+          <span class="cs-callout-label">The decision — best of both</span>
+          <p class="cs-callout-body"><strong>It was really a Patience vs Building long-term trust debate.</strong></p>
+          <p class="cs-callout-body">We capped the loop at 3 rounds. After the third set, users get the option to jump to results, with a soft nudge. No block. No guilt. We give them an out while being transparent about the tradeoff.</p>
+          <p class="cs-callout-body">Getting users to results, even slightly less refined ones, builds more trust than keeping them in a loop that feels endless. This was still a hypothesis at launch, the right threshold needed real usage data to confirm.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: VIEWING RESULTS -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Viewing best-matched results</h2>
+      <div class="cs-img">
+        <img src="images/creator-sourcing/Viewing%20best-matched%20results.svg" alt="Viewing best-matched results" />
+      </div>
+      <div class="cs-callout-row">
+        <div>
+          <span class="cs-callout-label">Challenge</span>
+          <p class="cs-callout-body">The system returns a ranked list of creators evaluated against every selected criterion. Users weren't only asking 'Is this a match?' but rather 'Is this creator worth my time?'</p>
+          <p class="cs-callout-body">Since discovery relied on the latest 100 ingested posts, AI confidence was only as strong as the available data.</p>
+          <p class="cs-callout-body">The challenge was to communicate relevance, confidence, and uncertainty through design, so users could make informed shortlisting decisions without digging deeper into every profile.</p>
+        </div>
+        <div>
+          <span class="cs-callout-label">Solution</span>
+          <p class="cs-callout-body">After several rounds of exploration and iteration, we arrived at a design that made both relevance and confidence visible at a glance.</p>
+          <ul class="cs-callout-list">
+            <li>Match Score + AI Summary → Why it's a match.</li>
+            <li>Criteria Chips → Evidence and confidence behind the match.</li>
+          </ul>
+          <p class="cs-callout-body">Users could now decide not just who to shortlist, and how much trust to place in each recommendation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: SHORTLISTING -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Shortlisting creators</h2>
+
+      <!-- Image 1 + its annotation -->
+      <div class="cs-img">
+        <img src="images/creator-sourcing/Shortlisting%20creators.svg" alt="Shortlisting creators" />
+      </div>
+      <p class="cs-annotation">Users can organize creators into new or existing lists, creating a natural bridge between discovery and campaign planning.</p>
+
+      <!-- Image 2 + its callouts -->
+      <div class="cs-img" style="margin-top: 80px;">
+        <img src="images/creator-sourcing/shortlisted%20page.svg" alt="Shortlisted creators list view" />
+      </div>
+      <div class="cs-callout-row">
+        <div>
+          <span class="cs-callout-label">Challenge</span>
+          <p class="cs-callout-body">On the shortlist page, we encountered architectural challenges. Because a shortlist could contain creators from multiple searches, each carrying its original criteria, the table had to support every criterion across the list — which meant a wide, sparse interface that was nearly impossible to scan.</p>
+        </div>
+        <div>
+          <span class="cs-callout-label">Solution</span>
+          <p class="cs-callout-body">This challenge required complete rethinking the shortlist architecture, which wasn't feasible for the MVP.</p>
+          <p class="cs-callout-body">Instead, we introduced criteria-based filtering, allowing users to quickly surface creators by Match and No Match status.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6: VETTING -->
+    <div class="cs-step">
+      <h2 class="cs-step-heading">Vetting creators</h2>
+      <div class="cs-img">
+        <img src="images/creator-sourcing/vetting%20creators.svg" alt="Vetting creators" />
+      </div>
+      <p class="cs-annotation">Discovery helped brands find the right creators, vetting helps them confidently assess whether those creators are legitimate, brand-safe, and worth collaborating with. Vetting answers questions like:</p>
+      <div class="cs-vetting-grid">
+        <div class="cs-vetting-card">"Should have <span style="color:#C78181;">never worked with a competitor brand</span>."</div>
+        <div class="cs-vetting-card">"Do they have any <span style="color:#C78181;">political controversy</span>?"</div>
+        <div class="cs-vetting-card">"Have they <span style="color:#C78181;">spoken negatively about our brand</span>?"</div>
+        <div class="cs-vetting-card">"What is their <span style="color:#C78181;">audience's perception</span> about them?"</div>
+        <div class="cs-vetting-card">"Do they have <span style="color:#C78181;">Fake engagement</span>?"</div>
+      </div>
+      <div class="cs-callout-row" style="margin-top: 0;">
+        <div>
+          <span class="cs-callout-label">The challenge</span>
+          <p class="cs-callout-body">To answer these questions, Vetting expands the analysis to a creator's full profile history, including owned posts, comments, external web mentions, and signals uncovered through reverse searches across our database enabling more confident decision-making.</p>
+          <p class="cs-callout-body">Each required a different evidence source and level of analysis.</p>
+          <p class="cs-callout-body">The challenge was to bring these signals together into a single, trustworthy experience without overwhelming users with research they didn't have time to conduct themselves.</p>
+        </div>
+        <div>
+          <span class="cs-callout-label">Solution</span>
+          <p class="cs-callout-body">We built vetting on the same natural-language workflow users already knew from discovery.</p>
+          <p class="cs-callout-body">Findings were organized into two pillars:</p>
+          <ul class="cs-callout-list">
+            <li><strong>Flags</strong> - performance quality, posting behavior, brand criticism, political commentary, and other risk signals.</li>
+            <li><strong>Competitor Mentions</strong> - evidence of relationships with competing brands.</li>
+          </ul>
+          <p class="cs-callout-body">A high-level safety assessment supports rapid evaluation, with detailed evidence available on demand within each creator profile.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOT DIVIDER -->
+    <div class="dot-divider">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- REFLECTIONS -->
+    <div style="margin-bottom: 0;">
+      <h2 class="cs-heading">Reflections</h2>
+      <div class="cs-reflections">
+        <div>
+          <span class="cs-reflection-label">Navigating tradeoffs</span>
+          <p class="cs-reflection-body">Some of the most important decisions in this project involved competing viewpoints with no obvious right answer. The breakthrough rarely came from choosing one side over the other. It came from staying with the tension long enough to uncover a better alternative.</p>
+        </div>
+        <div>
+          <span class="cs-reflection-label">Understanding the bigger picture</span>
+          <p class="cs-reflection-body">Users were about to pay real people and put their brand's name behind a recommendation, and every design decision was really a decision about how much we were asking them to trust a system that could be wrong. That's a heavier thing to design for than I expected going in.</p>
+        </div>
+        <div>
+          <span class="cs-reflection-label">Design & engineering collaboration</span>
+          <p class="cs-reflection-body">I used to think design and engineering disagreements were about negotiating feasibility, it was really about educating each other on AI and design, and unlocking edge cases neither of us would have thought of individually.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 64px 0 0;" />
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-label">You might want to checkout</span>
+      <div class="footer-links">
+        <a href="#">Resume</a>
+        <a href="https://www.linkedin.com/in/priyamakwana/" target="_blank">Linkedin</a>
+        <a href="https://priyamakwana.framer.website/" target="_blank">Archived portfolio</a>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    (function() {
+      let lastScroll = window.scrollY;
+      const sticky = document.getElementById('cs-nav-sticky');
+      window.addEventListener('scroll', function() {
+        const current = window.scrollY;
+        if (current < lastScroll && current > 80) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+        lastScroll = current;
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

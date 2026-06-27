@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meal Planner — Priya Makwana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #F5F4F0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #191919;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .page {
+      width: 698px;
+      margin: 0 auto;
+      padding: 64px 0 80px;
+    }
+
+    @media (max-width: 740px) {
+      .page { width: auto; padding: 40px 24px 80px; }
+    }
+
+    .cs-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .cs-nav a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      transition: color 0.15s;
+    }
+
+    .cs-nav a:hover { color: #191919; }
+
+    .cs-nav-sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(245, 244, 240, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .cs-nav-sticky.visible { transform: translateY(0); }
+    .cs-nav-sticky-inner {
+      width: 698px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    @media (max-width: 740px) {
+      .cs-nav-sticky-inner { width: auto; padding: 16px 24px; }
+    }
+    .cs-nav-sticky a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .cs-nav-sticky a:hover { color: #191919; }
+
+    .cs-title {
+      font-size: 38px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .cs-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    .cs-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    .cs-scroll-container {
+      width: 100%;
+      height: 600px;
+      border-radius: 21px;
+      background: #C8D5C2;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-bottom: 24px;
+    }
+
+    .cs-scroll-container::-webkit-scrollbar { width: 6px; }
+    .cs-scroll-container::-webkit-scrollbar-track { background: transparent; }
+    .cs-scroll-container::-webkit-scrollbar-thumb {
+      background: #A8BDA2;
+      border-radius: 100px;
+    }
+
+    .cs-scroll-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      padding: 30px;
+      cursor: zoom-in;
+    }
+
+    .cs-placeholder-img {
+      background: #EDECEA;
+      min-height: 420px;
+      border-radius: 21px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cs-placeholder-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #B8B5B0;
+    }
+
+    .cs-meta {
+      display: flex;
+      gap: 0;
+      margin-top: 32px;
+      margin-bottom: 64px;
+    }
+
+    .cs-meta-col { padding-right: 48px; }
+    .cs-meta-col:last-child { flex: 1; padding-right: 0; }
+
+    .cs-meta-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 8px;
+    }
+
+    .cs-meta-value {
+      display: block;
+      font-size: 15px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.6;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #E0DED9;
+      margin: 64px 0;
+    }
+
+    .dot-divider {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 80px 0;
+    }
+
+    .dot-divider span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D9D7D2;
+    }
+
+    .cs-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .cs-step-heading {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #191919;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    .cs-screen-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 16px;
+    }
+
+    .cs-step { margin-bottom: 120px; }
+
+    .cs-annotation {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-annotation + .cs-annotation { margin-top: 16px; }
+
+    .cs-callout-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 16px;
+    }
+
+    .cs-callout-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+    }
+
+    .cs-callout-body + .cs-callout-body { margin-top: 16px; }
+
+    .cs-callout-body strong {
+      font-weight: 600;
+      color: #191919;
+    }
+
+    .cs-callout-list {
+      list-style: none;
+      margin: 8px 0;
+    }
+
+    .cs-callout-list li {
+      font-size: 16px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .cs-callout-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #808080;
+    }
+
+    .cs-method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .cs-method-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .cs-method-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #808080;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .cs-method-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #191919;
+      margin-bottom: 8px;
+    }
+
+    .cs-method-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: #606060;
+      line-height: 1.55;
+    }
+
+    .footer { margin-top: 120px; }
+
+    .footer-label {
+      display: block;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #808080;
+      margin-bottom: 24px;
+    }
+
+    .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #808080;
+      border: 2px solid #E0DED9;
+      border-radius: 100px;
+      padding: 12px 24px;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .footer-links a:hover { border-color: #808080; color: #191919; }
+
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      cursor: zoom-out;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .lightbox-overlay.active { display: flex; }
+
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <nav class="cs-nav-sticky" id="cs-nav-sticky">
+    <div class="cs-nav-sticky-inner">
+      <a href="index.html">← Home</a>
+      <a href="#">Next project →</a>
+    </div>
+  </nav>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav class="cs-nav">
+      <a href="index.html">← Home</a>
+      <a href="#">Next project →</a>
+    </nav>
+
+    <!-- HERO -->
+    <h1 class="cs-title">Meal planning & tracking</h1>
+    <p class="cs-body">A food planner and diary app that is built around awareness, not calorie math. Track what you eat and what you need to buy, understand your patterns, and build a healthier relationship with food.</p>
+    <p style="margin-top: 12px; font-size: 15px; font-family: 'Inter', sans-serif;">
+      Check it out → <a href="https://hearth-meal-planner.vercel.app" target="_blank" style="color: #606060; text-decoration: underline; text-underline-offset: 3px;">hearth-meal-planner.vercel.app</a>
+    </p>
+
+    <!-- COVER IMAGE -->
+    <div style="background: #D4D8C3; border-radius: 21px; overflow: hidden; padding: 30px 30px 0 30px; margin-top: 32px;">
+      <img src="images/hearth-hero.png" alt="Hearth meal planning screens" style="width: 100%; height: auto; display: block;" />
+    </div>
+
+    <!-- PROBLEM -->
+    <div class="cs-step" style="margin-top: 48px;">
+      <h2 class="cs-heading">The story</h2>
+      <p class="cs-body">I love cooking—especially home-cooked, healthy meals. I enjoy improvising them into something wholesome and balanced. But it stops being fun when you have to make that decision 21 times a week while juggling work, fitness, and everything else life throws at you.</p>
+      <p class="cs-body" style="margin-top: 16px;">The default becomes ordering from endless food options, rotating through the same three meals, or skipping proper meals altogether. And when you finally find time to cook, you suddenly realize you're missing that one ingredient!</p>
+      <p class="cs-body" style="margin-top: 16px;">This pattern quietly turns into an unhealthy lifestyle before you even notice it.</p>
+      <p class="cs-body" style="margin-top: 16px;">If you live with flatmates, it gets worse. The question of the day—"What do we eat?"—shows up three times before you've even planned your afternoon. That's a lot of cognitive load to deal with every single day.</p>
+      <p class="cs-body" style="margin-top: 16px;">If you live away from home, this might sound familiar.<br />Back home, your parents are getting older, and being vegetarians, they're completely unbothered by how little protein they're actually eating. I couldn't do anything other than give them a 30-minute lecture on why it is essential.</p>
+      <p class="cs-body" style="margin-top: 16px;">I didn't need them tracking macros—I just wanted to know what they were actually eating.</p>
+      <p class="cs-body" style="margin-top: 16px;">This was something I needed to solve for myself and my family. It was really a personal problem, and I couldn't find anything that helped with planning and managing meals across households.</p>
+      <p class="cs-body" style="margin-top: 16px;"><strong>So I cooked something that did.</strong></p>
+      <p class="cs-body" style="margin-top: 16px;"><strong>The idea was simple — An app that removes the daily mental load of deciding what to cook and makes weekly meal planning feel like a quick ritual rather than a chore, and to extend that care to family members who live elsewhere.</strong></p>
+    </div>
+
+    <!-- THE PRODUCT -->
+    <div class="cs-step">
+      <h2 class="cs-heading">How it works</h2>
+      <p class="cs-body">Plan your weekly meals → get reminders for what to buy and cook → log what you actually cooked → review a weekly or monthly summary of what you ate.</p>
+      <p class="cs-body" style="margin-top: 16px;">Over time, those logs become something far more valuable: a clear picture of your eating habits, helping you make better food decisions without tracking every calorie.</p>
+      <p class="cs-body" style="margin-top: 16px;">You can create:</p>
+      <ul style="margin-top: 12px; padding-left: 20px;">
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">A personal meal plan</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">A shared plan with your flatmates or family</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">Separate plans for people you care for, like your parents</li>
+      </ul>
+      <p class="cs-body" style="margin-top: 16px;">Think of it like WhatsApp Groups — you're the admin and can manage multiple meal plans, each with its own members and schedule.</p>
+
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="cs-step">
+      <h2 class="cs-heading">Key features</h2>
+
+      <ul style="margin-top: 24px; padding-left: 20px;">
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Meal planning</strong> — weekly grid with multi-dish slots per meal type</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Recipe library</strong> — pre-loaded Indian recipes and user-added recipes, organised with dish labels</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Grocery lists</strong> — auto-generated per group, categorised by ingredient type</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Groups</strong> — household management, remote planning, member invites</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Daily tracking</strong> — mark meals as cooked or log what was eaten instead</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Weekly summary</strong> — completion rates and off-plan meal history per group</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;"><strong>Reminders</strong> — Sunday grocery nudge and daily evening prep reminder</li>
+      </ul>
+    </div>
+
+    <div class="dot-divider">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- NEXT STEPS -->
+    <div class="cs-step">
+      <h2 class="cs-heading">What's next</h2>
+      <p class="cs-body">The MVP is functional but the UX still needs work. Several flows — especially the dish picker on mobile and the first-time planning experience — feel heavier than they should. I want to reduce friction in the core planning loop before pushing it to real users.</p>
+
+      <ul style="margin-top: 16px; padding-left: 20px;">
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">Refine the UX/UI by fixing interaction gaps, improving logic, and adding moments of delight.</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">Fix bugs and complete missing user flows.</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">Expand the recipe database with a wider variety of meal options.</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">Improve labels and information architecture to make search more intuitive.</li>
+        <li style="font-size: 16px; color: #606060; line-height: 1.65;">Optimize the experience for mobile.</li>
+      </ul>
+
+      <p class="cs-body" style="margin-top: 16px;">The goal: keep the MVP simple, delightful, and useful enough that I'd genuinely want to use it every week.</p>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer-label">You might want to checkout</span>
+      <div class="footer-links">
+        <a href="#">Resume</a>
+        <a href="https://www.linkedin.com/in/priyamakwana/" target="_blank">Linkedin</a>
+        <a href="https://priyamakwana.framer.website/" target="_blank">Archived portfolio</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <script>
+    document.querySelectorAll('.cs-scroll-container img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+    (function() {
+      let lastScroll = window.scrollY;
+      const sticky = document.getElementById('cs-nav-sticky');
+      window.addEventListener('scroll', function() {
+        const current = window.scrollY;
+        if (current < lastScroll && current > 80) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+        lastScroll = current;
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
