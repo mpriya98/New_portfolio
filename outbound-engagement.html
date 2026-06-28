@@ -503,6 +503,7 @@
       cursor: default;
     }
     .cs-scroll-container img { cursor: zoom-in; }
+    .page img:not(#lightbox-img) { cursor: zoom-in; }
   </style>
 </head>
 <body>
@@ -715,7 +716,7 @@
   </div>
 
   <script>
-    document.querySelectorAll('.cs-scroll-container img').forEach(img => {
+    document.querySelectorAll('.page img:not(#lightbox-img)').forEach(img => {
       img.addEventListener('click', () => {
         document.getElementById('lightbox-img').src = img.src;
         document.getElementById('lightbox').classList.add('active');
