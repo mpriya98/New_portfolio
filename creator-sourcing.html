@@ -126,6 +126,27 @@
       width: 100%;
       height: auto;
       display: block;
+      cursor: zoom-in;
+    }
+
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      cursor: zoom-out;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      cursor: default;
     }
 
     /* ── METADATA ── */
@@ -683,7 +704,24 @@
     </div>
 
   </div>
+
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
   <script>
+    document.querySelectorAll('.cs-img img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
     (function() {
       let lastScroll = window.scrollY;
       const sticky = document.getElementById('cs-nav-sticky');
